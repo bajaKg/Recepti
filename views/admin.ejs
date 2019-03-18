@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax Sqlite</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.socket.io/socket.io-1.3.6.js"></script>
+    <script>
+			var podaci = function()
+			{
+				var xhttp = new XMLHttpRequest();
+				xhttp.open("GET", "data", true);
+				xhttp.send();
+			};
+    </script>
+    <style>
+        td{
+            border: 1px solid blue;
+        }
+    </style>
+
+</head>
+<body>
+    <table id="users" border="1">        
+    </table>
+</body>
+<script>
+
+    var socket = io.connect(document.domain + ":8081/dbUsersData", { query: "foo=bar" });
+    
+        socket.on('connected', function () { /*podaci();*/ });
+
+		socket.on('dbDataReady', function(data)
+		{
+		    var korisnici = JSON.parse(data);		    
+		    var tabela = document.getElementById("users");
+
+			while (tabela.rows.length > 0)
+			    tabela.deleteRow(0);
+			tabela.innerHTML = "<tr><th>ID</th><th>FirstName</th><th>LastName</th><th>Username</th><th>Password</th><th>Role</th><th>Obrisi</th></tr>";
+			for(var i = 0; i < korisnici.length; i++)
+			{                        
+			    var row = tabela.insertRow();
+			    var id = row.insertCell(0);
+			    id.innerHTML = korisnici[i].id;
+			    var ime = row.insertCell(1);
+			    ime.innerHTML = korisnici[i].firstName;
+			    var prezime = row.insertCell(2);
+			    prezime.innerHTML = korisnici[i].lastName;
+			    var username = row.insertCell(3);
+			    username.innerHTML = korisnici[i].username;
+			    var password = row.insertCell(4);
+			    password.innerHTML = korisnici[i].password;
+			    var role = row.insertCell(5);
+			    if(korisnici[i].role == 'admin')
+			        role.innerHTML = "<select id='slctRole' onchange='izmeni(" + korisnici[i].id + ")'><option value='admin'>" + korisnici[i].role + "</option><option value='user'>user</option></select>";
+			    else
+			        role.innerHTML = "<select id='slctRole' onchange='izmeni(" + korisnici[i].id + ")'><option value='user'>" + korisnici[i].role + "</option><option value='admin'>admin</option></select>";
+
+			    var obrisi = row.insertCell(6);
+			    obrisi.innerHTML = "<button type='button' onclick='obrisi("+korisnici[i].id+")'>Obrisi</button>";
+			}
+		});
+
+		var obrisi = function (id) {
+		    //alert("id korisnika: " + id);
+		    //console.log(id);
+		    var xhr = new XMLHttpRequest();
+		    xhr.open('POST', 'deleteUser', true);
+		    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		    xhr.onload = function () {		        
+		        console.log(this.responseText);
+		    };            
+		    xhr.send("ID=" + id);
+		    location.reload();
+		}
+		var izmeni = function (id) {
+		    console.log('changed');
+		    //alert("id korisnika: " + id + " promeni role u: " + document.getElementById('slctRole').value);
+		    var xhr = new XMLHttpRequest();
+		    xhr.open('POST', 'changeRole', true);
+		    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		    xhr.onload = function () {
+		        console.log(this.responseText);
+		    };
+		    xhr.send("ID=" + id + "&role=" + document.getElementById('slctRole').value);
+		}
+
+		var recipe = function () {
+
+		}
+</script>
+</html>

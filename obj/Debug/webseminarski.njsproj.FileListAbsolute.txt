@@ -1,0 +1,2 @@
+C:\Users\bajic\Desktop\webseminarski\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Users\bajic\Desktop\webseminarski\obj\Debug\webseminarski.njsprojResolveAssemblyReference.cache

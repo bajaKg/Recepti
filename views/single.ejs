@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recept</title>
+    
+    <!-- BOOTSTRAP -->
+    <link href="includes/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="includes/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Imprima" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link href="includes/mat-icons/materialdesignicons.min.css" rel="stylesheet">
+    <link href="includes/mat-icons/materialdesignicons.css" rel="stylesheet">
+    <!--CUSTOM CSS -->
+    <link href="includes/style.css" rel="stylesheet"> 
+    <!-- google captcha -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+    function myfunction() {
+            var cookie = getCookie("userRole");
+            var userImage = getCookie("userImage");
+            var username = getCookie("username");
+            if (cookie != "") {
+                document.getElementById("signin").innerHTML = "<a href='logout'>Sign out</a>";
+                document.getElementById("userImage").innerHTML = "<a href='myPage'><img height='25' width='25' src='"+userImage+"'/>"+"  "+username+"</a>";
+                document.getElementById("alter").innerHTML = "<a style='color:yellow;' href='alterRecipe?id=<%= id %>'>ALTER RECIPE</a>";
+                document.getElementById("remove").innerHTML = "<a style='color:yellow;' href='removeRecipe?id=<%= id %>'>REMOVE RECIPE</a>";
+                //document.getElementById("username").innerHTML = "<a href='myPage'>"+username+"</a>";
+                console.log(cookie);
+                console.log(userImage);
+                console.log(username);
+            }
+            else
+                console.log("nada");            
+        }
+
+        function getSignin(){
+          console.log('getSignin');
+          if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+                } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              /*xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                      //console.log(this.responseText);
+                      var data = JSON.parse(this.responseText);
+                      location.reload();
+                }
+              }*/
+              xhttp.open("GET", "signin", true);
+              xhttp.send();
+        }
+    </script>
+</head>
+<body id="receptBody" onload="myfunction()">
+
+    <div class="container-fluid" id="main">
+       <div class="row" id="menu">
+           <nav class="navbar navbar-default" role="navigation" id="navBar">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>    
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="mItems">
+
+                      <ul class="nav navbar-nav navbar-left">
+                       <li><a class="navbar-brand" href="/"><img src="includes/logo.png" id="logo"></a></li>
+                      </ul>
+                      
+                      <ul class="nav navbar-nav navbar-right" id="menuItems">
+                        <li><a href="/">HOME</a></li>                     
+                        <!--<li><a href="#"><i class="fa fa-meetup" aria-hidden="true"></i> PORTFOLIO</a></li>-->
+                        <li id="userImage"></li>
+                        <li id="alter"></li>
+                        <li id="remove"></li>
+                        <li id='signin'><a href="signin">Sign in</a></li>
+                    </ul>
+                   
+                  </div>
+                </nav><!--end of nav bar-->
+       </div><!-- end of menu container -->
+       <div class="container">
+            <div class="row" id="singleContent">
+                <div class="col-md-9">
+                    <img src="<%= recipePicture %>" alt="granola" class="responsive">
+                       <div id="sastojci">
+                        <h1><%= recipeName %></h1>
+                        <p><%= description %></p>
+                        <hr>
+                        <i class="fa fa-eyedropper">  &nbsp;&nbsp;</i><span class="title"> Ingredients</span>
+                        <% for (var i = 0; i < ingredients.length; i++) { %>
+                        <div id = 'ch<%=i%>' class="checkbox" onchange="crossOut('ch<%=i%>')">
+                            <label style="font-size: 1.5em;">
+                                <input type="checkbox" value="">
+                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                <span><%= ingredients[i].ingredientName %> <span>
+                            </label>
+                        </div>
+
+                        <% } %>
+
+                    </div>
+                </div><!-- end of col-md-9 -->
+                <div class="col-md-3">
+                    <div class="singleContentRight">
+                        <img width='25' height='25' src="<%= userPicture %>"><span> By <span class="name"><%= firstName%> <%= lastName %></span></span>
+                        <br><br>
+                        <p class="pull-left">Preparation Time:</p>
+                        <p class="pull-right"><%= preparationTime %> min</p>
+                        <br><hr>
+                        <p class="pull-left">Cook Time:</p>
+                        <p class="pull-right"><%= cookTime %> min</p>
+                        <br><hr>
+                        <p class="pull-left">Servings:</p>
+                        <p class="pull-right"><%= servings %> people</p>
+                        <br><hr>
+                        <p class="pull-left">Cuisine:</p>
+                        <p class="pull-right"><span class="name"><%= cuisine %></span></p>
+                        <br><hr>
+                        <p class="pull-left">Category:</p>
+                        <p class="pull-right"><span class="name"><%= category %></span></p>
+                        <br><hr>
+                        <p class="pull-left">Ratings</p>
+                        <div class="starrr stars-existing pull-right" id="starsSingle" data-rating='<%= ratings %>'></div>	
+                    </div>
+                </div><!-- end of col-md-3 -->
+            </div><!-- end of row -->
+       </div><!-- end of container -->
+       <div class="row" id="footer">
+           <p>All rights reserved © Designed by <span class="name">Milos Bajic</span></p>
+       </div>
+ </div><!-- end of main container -->
+ <!-- Sign Up modal -->
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign up for free account</h4>
+      </div>      
+      <form action='signup' method='post'>
+      <div class="modal-body">        
+          <div class="input-group">
+            <p>First Name:</p>
+            <input type="text" name='firstName' class="form-control">
+          </div><!-- /input-group -->
+          <br>
+          <div class="input-group">
+            <p>Last Name:</p>
+            <input type="text" name='lastName' class="form-control">
+          </div><!-- /input-group -->
+          <br>
+          <div class="input-group">
+            <p>Email:</p>
+            <input type="text" name='username' class="form-control" placeholder="someone@example.com">
+          </div><!-- /input-group -->
+          <br>
+          <div class="input-group">
+            <p>Password:</p>
+            <input type="password" name='password' class="form-control" placeholder="**********">
+          </div><!-- /input-group -->
+          <br>
+          <!--<div class="input-group">
+            <p>Confirm Password:</p>
+            <input type="password" name='confirmPassword' class="form-control" placeholder="**********">
+          </div>--><!-- /input-group -->
+          <br>                                    
+          <br>
+          <div class="g-recaptcha" data-sitekey="6LcsQRQUAAAAADehRLQVy6tcHlLLf1KlGoZ0QJ6x"></div>
+          <br><br>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" name='checkIfBot' aria-label="...">
+            </span>
+            <p>agree with <a href="terms">terms and conditions</a></p>
+          </div><!-- /input-group -->
+                                  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" name='submit' class="btn btn-primary" data-dismiss="modal">Create account</button>          
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Online version of jQuery-->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<!--Bootstrap js-->
+	<script src="includes/js/bootstrap.min.js"></script>
+	<!--custom js-->
+    <script src="includes/customJS.js"></script>
+</body>
+</html>

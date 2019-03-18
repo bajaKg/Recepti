@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recepti</title>
+    
+    <!-- BOOTSTRAP -->
+    <link href="includes/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="includes/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Imprima" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link href="includes/mat-icons/materialdesignicons.min.css" rel="stylesheet">
+    <link href="includes/mat-icons/materialdesignicons.css" rel="stylesheet">
+    <!--CUSTOM CSS -->
+    <link href="includes/style.css" rel="stylesheet"> 
+    <!-- google captcha -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        function topRated(){
+              if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+                } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                    //console.log(this.responseText);
+                    var data = JSON.parse(this.responseText);
+                    var topRated = document.getElementById('top-rated').childNodes[1];
+                    //console.log(topRated);
+                    console.log(data.length);
+                    for (var i = data.length - 1; i >= 0; i--) {
+                      //data[i];
+                      var shortDescription = "";
+                      
+                      var text = data[i].description;
+                      var array = text.split(" ");                      
+                      //for (var i = 0; i < array.length; i++) {
+                        if(array.length > 16){
+                        shortDescription += array[0] + " " + array[1] + " " + array[2] + " " + array[3]+ " " + array[4]+ " " + array[5]+ " " + array[6]+ " " + array[7]+ " " + array[8]+ " " + array[9] + " " +  array[10] + " " + array[11] + " " + array[12] + " " + array[13]+ " " + array[14]+ " " + array[15]+ " " + array[16];
+                        }                        
+                      //}
+                      
+                      shortDescription+="...";                      
+                      var html = "<div class='col-md-4'>"+
+                                   "<div class='panel panel-default'>"+
+                                      "<div class='panel-header'>"+
+                                          "<img src='"+data[i].picture+"' alt='granola' class='jedan'>"+
+                                      "</div>"+
+                                       "<div class='panel-body'>"+
+                                            "<h1>"+data[i].recipeName+"</h1>"+
+                                           "<p>"+shortDescription+"</p>"+
+                                           "<a href='recipe?id="+data[i].id+"' class='btn btn-lg btn-success center-block'>Continue reading</a>"+
+                                           "<hr>"+
+                                           "<img width='25' height='25' src='"+data[i].userImage+"' alt='' class='user-image'>"+
+                                           "<span> By <span class='name'>"+data[i].firstName+" "+data[i].lastName+"</span></span>"+
+                                       "</div>"+
+                                   "</div>"+
+                                "</div>";                        
+                      topRated.innerHTML += html;
+
+                    }
+                 }
+              else
+                  console.log("nista");
+              }
+              xhttp.open("GET", "topRated", true);
+              xhttp.send();
+        }
+
+        function myfunction() {
+            var cookie = getCookie("userRole");
+            if (cookie != "") {
+                document.getElementById("login").innerHTML = "<a href='/logout'>Log out</a>";
+                console.log(cookie);
+            }
+            else
+                console.log("nada");
+
+            topRated();
+        }
+    </script>
+</head>
+<body>
+   <div class="container-fluid" id="main">
+       <div class="row" id="menu">
+           <nav class="navbar navbar-default" role="navigation" id="navBar">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>    
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="mItems">
+
+                      <ul class="nav navbar-nav navbar-left">
+                       <li><a class="navbar-brand" href="#"><img src="includes/logo.png" id="logo"></a></li>
+                      </ul>
+                      
+                      <ul class="nav navbar-nav navbar-right" id="menuItems">
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="single.html">RECEPT</a></li>
+                        <li><a href="#"><i class="fa fa-meetup" aria-hidden="true"></i> PORTFOLIO</a></li>
+                        <li><a href="#">BOOK ONLINE</a></li>
+                        <li><a href="#">BLOG</a></li>
+                        <li>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal">
+                              <i class="fa fa-sign-in">&nbsp;</i>SIGN IN/SIGN UP
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Sign in to your account</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                        
+                                            <div class="input-group">
+                                                <p>Email:</p>
+                                                <input type="text" class="form-control" placeholder="someone@example.com">
+                                            </div><!-- /input-group -->
+                                            <br><br>
+                                            <div class="input-group">
+                                                <p>Password:</p>
+                                                <input type="password" class="form-control" placeholder="***********">
+                                            </div><!-- /input-group -->
+                                            <br><br>
+                                            <p>Don't have an account?<br> Sign up free<a data-dismiss="modal" class="btn btn-link" data-toggle="modal" data-target="#signUpModal">HERE!</a></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </li>
+                    </ul>
+                   
+                  </div>
+                </nav><!--end of nav bar-->
+       </div><!-- end of menu container -->
+       <div class="row">
+           <div class="col-md-12" id="sliderCol">
+               <!-- Slider -->
+               <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                    <div class="item active" id="carouselItem">
+                      <img src="includes/slider/cake-219595_1920.jpg" alt="Cake" class="sliderImg">
+                      <div class="carousel-caption" id="carCaption">
+                        <h1>Brazilian Black Bean Stew</h1>
+                        <p>This easy yet wonderful stew can be made any time of year. The meat can be omitted without compromising the dish.</p>
+                      </div>
+                    </div>
+                    <div class="item" id="carouselItem">
+                      <img src="includes/slider/hamburger-494706_1920.jpg" alt="hamburger" class="sliderImg">
+                      <div class="carousel-caption" id="carCaption">
+                        <h1>Brazilian Black Bean Stew</h1>
+                        <p>This easy yet wonderful stew can be made any time of year. The meat can be omitted without compromising the dish.</p>
+                      </div>
+                    </div>
+                    <div class="item" id="carouselItem">
+                      <img src="includes/slider/pizza-346985_1920.jpg" alt="pizza" class="sliderImg">
+                      <div class="carousel-caption" id="carCaption">
+                        <h1>Brazilian Black Bean Stew</h1>
+                        <p>This easy yet wonderful stew can be made any time of year. The meat can be omitted without compromising the dish.</p>
+                      </div>
+                    </div>
+                    
+                  </div>
+
+                  <!-- Controls -->
+                  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span><img alt="left arrow" src="includes/slider/arrow-left-carousel.png" class="carouselArrow"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span><img src="includes/slider/arrow-right-carousel.png" alt="right arrow" class="carouselArrow"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div><!--end of carousel-->
+           </div><!-- end of col-md-12 -->
+           <div class="col-md-12" id="top-rated">
+                <div class="container">
+                   <div class="col-md-4">
+                       <div class="panel panel-default">
+                          <div class="panel-header">
+                              <img src="includes/recepti-slike/bev_2-848x477.jpg" alt="granola">
+                              <div class="starrr stars-existing" data-rating='3'></div> 
+                          </div>
+                           <div class="panel-body">
+                                <h1>Chilled mocha</h1>
+                               <p>First, make some coffee ice cubes, then blend them together with milk and chocolate syrup for a frosty treat!</p>
+                               <a href="#" class="btn btn-lg btn-success center-block">Continue reading</a>
+                               <hr>
+                               <img src="includes/user-image/av_4-25x25.png" alt="user-maja" class="user-image">
+                               <span> By <span class="name">Maja Majic</span></span>
+                           </div>
+                       </div>
+                   </div><!-- end of col-md-4 -->
+                   <div class="col-md-4">
+                        <div class="panel panel-default">
+                          <div class="panel-header">
+                              <img src="includes/recepti-slike/brownie-548591-848x477.jpg" alt="granola">
+                              <div class="starrr stars-existing" data-rating='2'></div> 
+                          </div>
+                           <div class="panel-body">
+                                <h1>Chilled mocha</h1>
+                               <p>First, make some coffee ice cubes, then blend them together with milk and chocolate syrup for a frosty treat!</p>
+                               <a href="#" class="btn btn-lg btn-success center-block">Continue reading</a>
+                               <hr>
+                               <img src="includes/user-image/av_4-25x25.png" alt="user-maja" class="user-image">
+                               <span> By <span class="name">Maja Majic</span></span>
+                           </div>
+                       </div>
+                   </div><!-- end of col-md-4 -->
+                   <div class="col-md-4">
+                        <div class="panel panel-default">
+                          <div class="panel-header">
+                              <img src="includes/recepti-slike/nougat-599518_1920-848x477.jpg" alt="granola">
+                              <div class="starrr stars-existing" data-rating='4'></div> 
+                          </div>
+                           <div class="panel-body">
+                                <h1>Chilled mocha</h1>
+                               <p>First, make some coffee ice cubes, then blend them together with milk and chocolate syrup for a frosty treat!</p>
+                               <a href="#" class="btn btn-lg btn-success center-block">Continue reading</a>
+                               <hr>
+                               <img src="includes/user-image/av_4-25x25.png" alt="user-maja" class="user-image">
+                               <span> By <span class="name">Maja Majic</span></span>
+                           </div>
+                       </div>
+                   </div><!-- end of col-md-4 -->
+               </div><!-- end of container -->
+            </div><!-- end of col-md-12 -->
+       </div><!-- end of row -->
+   </div><!-- end of main container -->
+   
+   
+   
+   <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Sign up for free account</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                        
+                                            <div class="input-group">
+                                                <p>First Name:</p>
+                                                <input type="text" class="form-control">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            <div class="input-group">
+                                                <p>Last Name:</p>
+                                                <input type="text" class="form-control">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            <div class="input-group">
+                                                <p>Email:</p>
+                                                <input type="text" class="form-control" placeholder="someone@example.com">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                             <div class="input-group">
+                                                <p>Password:</p>
+                                                <input type="password" class="form-control" placeholder="**********">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            <div class="input-group">
+                                                <p>Confirm Password:</p>
+                                                <input type="password" class="form-control" placeholder="**********">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            <br>
+                                            <div class="g-recaptcha" data-sitekey="6LcsQRQUAAAAADehRLQVy6tcHlLLf1KlGoZ0QJ6x"></div>
+                                            <br><br>
+                                           <div class="input-group">
+                                              <span class="input-group-addon">
+                                                <input type="checkbox" aria-label="...">
+                                              </span>
+                                              <p>agree with <a href="terms.html">terms and conditions</a></p>
+                                            </div><!-- /input-group -->
+                                            
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+   
+   
+   
+   
+    <!-- Online version of jQuery-->
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <!--Bootstrap js-->
+  <script src="includes/js/bootstrap.min.js"></script>
+  <!--custom js-->
+    <script src="includes/customJS.js"></script>
+</body>
+</html>

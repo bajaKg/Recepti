@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recepti</title>
+    
+    <!-- BOOTSTRAP -->
+    <link href="includes/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="includes/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Imprima" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link href="includes/mat-icons/materialdesignicons.min.css" rel="stylesheet">
+    <link href="includes/mat-icons/materialdesignicons.css" rel="stylesheet">
+    <!--CUSTOM CSS -->
+    <link href="includes/style.css" rel="stylesheet"> 
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        function myRecipes(){
+              if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+                } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                    //console.log(this.responseText);
+                    var data = JSON.parse(this.responseText);
+                    var topRated = document.getElementById('top-rated').childNodes[1];
+                    //console.log(topRated);
+                    console.log(data.length);
+                    for (var i = data.length - 1; i >= 0; i--) {
+                      //data[i];
+                      var shortDescription = "";
+                      
+                      var text = data[i].description;
+                      var array = text.split(" ");                      
+                      //for (var i = 0; i < array.length; i++) {
+                        if(array.length > 16){
+                        shortDescription += array[0] + " " + array[1] + " " + array[2] + " " + array[3]+ " " + array[4]+ " " + array[5]+ " " + array[6]+ " " + array[7]+ " " + array[8]+ " " + array[9] + " " +  array[10] + " " + array[11] + " " + array[12] + " " + array[13]+ " " + array[14]+ " " + array[15]+ " " + array[16];
+                        }                        
+                      //}
+                      
+                      shortDescription+="...";                      
+                      console.log(data[i].rating);
+                      var html = "<div class='col-md-4'>"+
+                                   "<div class='panel panel-default'>"+
+                                      "<div class='panel-header'>"+
+                                          "<a href='recipe?id="+data[i].id+"'><img src='"+data[i].picture+"' alt='granola'></a>"+
+                                          "<!-- <div class='starrr stars-existing' data-rating='"+data[i].rating+"'></div>--> "+
+                                      "</div>"+
+                                       "<div class='panel-body'>"+
+                                            "<h1>"+data[i].recipeName+"</a></h1>"+
+                                           "<p>"+shortDescription+"</p>"+
+                                           "<a href='recipe?id="+data[i].id+"' class='btn btn-lg btn-success center-block'>Continue reading</a>"+
+                                           "<hr>"+
+                                           "<img width='25' height='25' src='"+data[i].userImage+"' alt='' class='user-image'>"+
+                                           "<span> By <span class='name'>"+data[i].firstName+" "+data[i].lastName+"</span></span>"+
+                                       "</div>"+
+                                   "</div>"+
+                                "</div>";                        
+                      topRated.innerHTML += html;
+
+                    }
+                 }
+              else
+                  console.log("nista");
+              }
+              xhttp.open("GET", "myRecipes", true);
+              xhttp.send();
+        }
+
+        function myfunction() {
+            var cookie = getCookie("userRole");
+            var userImage = getCookie("userImage");
+            var username = getCookie("username");
+            if (cookie != "") {
+                document.getElementById("signin").innerHTML = "<a href='logout'>Sign out</a>";
+                document.getElementById("userImage").innerHTML = "<a href='myPage'><img height='25' width='25' src='"+userImage+"'/>"+"  "+username+"</a>";
+                //document.getElementById("username").innerHTML = "<a href='myPage'>"+username+"</a>";
+                console.log(cookie);
+                console.log(userImage);
+                console.log(username);
+            }
+            else
+                console.log("nada");
+
+            myRecipes();
+        }
+
+        function getSignin(){
+          console.log('getSignin');
+          if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+                } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              /*xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                      //console.log(this.responseText);
+                      var data = JSON.parse(this.responseText);
+                      location.reload();
+                }
+              }*/
+              xhttp.open("GET", "signin", true);
+              xhttp.send();
+        }
+
+        function postSignin(){
+          if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+                } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                      //console.log(this.responseText);
+                      var data = JSON.parse(this.responseText);
+                      location.reload();
+                }
+              }
+
+              xhttp.open("POST", "signin", true);
+              xhttp.send();
+        }
+    </script>
+</head>
+<body onload="myfunction()">
+   <div class="container-fluid" id="main">
+       <div class="row" id="menu">
+           <nav class="navbar navbar-default" role="navigation" id="navBar">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>    
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="mItems">
+
+                      <ul class="nav navbar-nav navbar-left">
+                       <li><a class="navbar-brand" href="/"><img src="includes/logo.png" id="logo"></a></li>
+                      </ul>
+                      
+                      <ul class="nav navbar-nav navbar-right" id="menuItems">
+                        <li><a href="/">HOME</a></li>
+                        <li><a href="addnew">Add new</a></li>
+                        <li id="userImage"></li>
+                        <li id="username"></li>
+                        <li id='signin'><a href="signin">Sign in</a></li>
+                    </ul>
+                   
+                  </div>
+                </nav><!--end of nav bar-->
+       </div><!-- end of menu container -->
+       <div class="row">
+           <div class="col-md-12" id="top-rated">
+              <div class="container">
+                   <!-- Kontejner za prikaz skracenih verzija recepta koje se dinamicki ucitavaju iz baze -->
+              </div><!-- end of container -->
+           </div><!-- end of col-md-12 -->
+       </div><!-- end of row -->
+   </div><!-- end of main container -->
+
+  <!-- Online version of jQuery-->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<!--Bootstrap js-->
+	<script src="includes/js/bootstrap.min.js"></script>
+	<!--custom js-->
+  <script src="includes/customJS.js">        
+  </script>
+</body>
+</html>

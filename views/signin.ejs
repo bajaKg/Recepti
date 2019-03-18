@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recept</title>
+    
+    <!-- BOOTSTRAP -->
+    <link href="includes/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="includes/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Imprima" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link href="includes/mat-icons/materialdesignicons.min.css" rel="stylesheet">
+    <link href="includes/mat-icons/materialdesignicons.css" rel="stylesheet">
+    <!--CUSTOM CSS -->
+    <link href="includes/style.css" rel="stylesheet">
+    <!-- google captcha -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body id="receptBody">
+
+    <div class="container-fluid" id="main">
+       <div class="row" id="menu">
+           <nav class="navbar navbar-default" role="navigation" id="navBar">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="mItems">
+
+                      <ul class="nav navbar-nav navbar-left">
+                       <li><a class="navbar-brand" href="/"><img src="includes/logo.png" id="logo"></a></li>
+                      </ul>
+                      
+                      <ul class="nav navbar-nav navbar-right" id="menuItems">
+                        <li><a href="/">HOME</a></li>                        
+                        <!--<li><a href="#"><i class="fa fa-meetup" aria-hidden="true"></i> PORTFOLIO</a></li>
+                        <li><a href="#">BOOK ONLINE</a></li>
+                        <li><a href="#">BLOG</a></li>-->
+                        <li>
+                            <a href="signup">Signup</a>
+                        </li>
+                    </ul>                   
+                  </div>
+                </nav><!--end of nav bar-->
+       </div><!-- end of menu container -->
+
+      <form action='signin' method='post'>
+        <table>         
+          <tr><td>Email </td>   <td> <input type='text' name='username'><br/></td></tr>
+          <tr><td>Password </td><td><input type='password' name='password'><br/></td></tr>
+          <tr><td></td><td><input type='submit' name='submit' value="Submit">  </td>   </tr>
+        </table>
+      </form>
+            
+ </div><!-- end of main container -->      
+  <!-- Online version of jQuery-->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<!--Bootstrap js-->
+	<script src="includes/js/bootstrap.min.js"></script>
+	<!--custom js-->
+    <script src="includes/customJS.js"></script>
+</body>
+</html>

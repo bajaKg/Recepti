@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{92c264bb-5b3e-4f5e-a897-74ae4f090486}</ProjectGuid>
+    <ProjectHome />
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>app.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="single.html" />
+    <Content Include="views\content.html" />
+    <Content Include="linkovi.txt" />
+    <Content Include="admin.html" />
+    <Content Include="index.html" />
+    <Content Include="login.html" />
+    <Content Include="style.css" />
+    <Content Include="logo.png" />
+    <Content Include="package.json" />
+    <Compile Include="app.js" />
+    <Compile Include="customJS.js" />
+    <Compile Include="database.js" />
+    <Content Include="includes\css\bootstrap-theme.css" />
+    <Content Include="includes\css\bootstrap-theme.min.css" />
+    <Content Include="includes\css\bootstrap.css" />
+    <Content Include="includes\css\bootstrap.min.css" />
+    <Content Include="includes\css3-animate-it-master\css3-animate-it.jquery.json" />
+    <Content Include="includes\css3-animate-it-master\README.md" />
+    <Content Include="includes\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="includes\fonts\glyphicons-halflings-regular.svg" />
+    <Compile Include="includes\js\bootstrap.js" />
+    <Compile Include="includes\js\bootstrap.min.js" />
+    <Compile Include="includes\js\npm.js" />
+    <Content Include="includes\mat-icons\materialdesignicons.css" />
+    <Content Include="includes\mat-icons\materialdesignicons.min.css" />
+    <Content Include="includes\recepti-slike\bev_2-360x203.jpg" />
+    <Content Include="includes\recepti-slike\brownie-548591-360x203.jpg" />
+    <Content Include="includes\recepti-slike\nougat-599518_1920-360x203.jpg" />
+    <Content Include="includes\slider\arrow-left-carousel.png" />
+    <Content Include="includes\slider\arrow-right-carousel.png" />
+    <Content Include="includes\slider\cake-219595_1920.jpg" />
+    <Content Include="includes\slider\hamburger-494706_1920.jpg" />
+    <Content Include="includes\slider\pizza-346985_1920.jpg" />
+    <Content Include="includes\user-image\av_4-25x25.png" />
+    <Content Include="includes\css3-animate-it-master\css\animations-ie-fix.css" />
+    <Content Include="includes\css3-animate-it-master\css\animations.css" />
+    <Content Include="includes\css3-animate-it-master\example-assets\style.css" />
+    <Compile Include="includes\css3-animate-it-master\js\css3-animate-it.js" />
+    <Content Include="includes\css3-animate-it-master\example-assets\img\bg_header.jpg" />
+    <Content Include="includes\font-awesome\css\font-awesome.css" />
+    <Content Include="includes\font-awesome\css\font-awesome.min.css" />
+    <Content Include="includes\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="views\single.ejs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="includes" />
+    <Folder Include="includes\css" />
+    <Folder Include="includes\css3-animate-it-master" />
+    <Folder Include="includes\css3-animate-it-master\css" />
+    <Folder Include="includes\css3-animate-it-master\example-assets" />
+    <Folder Include="includes\css3-animate-it-master\example-assets\img" />
+    <Folder Include="includes\css3-animate-it-master\js" />
+    <Folder Include="includes\css3-animate-it-master\less" />
+    <Folder Include="includes\css3-animate-it-master\less\animations" />
+    <Folder Include="includes\css3-animate-it-master\less\mixins" />
+    <Folder Include="includes\font-awesome" />
+    <Folder Include="includes\font-awesome\css" />
+    <Folder Include="includes\font-awesome\fonts" />
+    <Folder Include="includes\font-awesome\less" />
+    <Folder Include="includes\font-awesome\scss" />
+    <Folder Include="includes\fonts" />
+    <Folder Include="includes\js" />
+    <Folder Include="includes\mat-icons" />
+    <Folder Include="includes\recepti-slike" />
+    <Folder Include="includes\slider" />
+    <Folder Include="includes\user-image" />
+    <Folder Include="javascript" />
+    <Folder Include="typings\" />
+    <Folder Include="typings\globals\" />
+    <Folder Include="typings\globals\async\" />
+    <Folder Include="typings\globals\express-session\" />
+    <Folder Include="typings\globals\node\" />
+    <Folder Include="typings\globals\socket.io\" />
+    <Folder Include="typings\globals\sqlite3\" />
+    <Folder Include="views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="typings\globals\async\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\express-session\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\socket.io\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\sqlite3\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

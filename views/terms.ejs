@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recept</title>
+    
+    <!-- BOOTSTRAP -->
+    <link href="includes/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="includes/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Imprima" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link href="includes/mat-icons/materialdesignicons.min.css" rel="stylesheet">
+    <link href="includes/mat-icons/materialdesignicons.css" rel="stylesheet">
+    <!--CUSTOM CSS -->
+    <link href="includes/style.css" rel="stylesheet"> 
+    <!-- google captcha -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body id="receptBody">
+    <div class="container-fluid" id="main">
+       <div class="row" id="menu">
+           <nav class="navbar navbar-default" role="navigation" id="navBar">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>    
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="mItems">
+
+                      <ul class="nav navbar-nav navbar-left">
+                       <li><a class="navbar-brand" href="#"><img src="includes/logo.png" id="logo"></a></li>
+                      </ul>
+                      
+                      <ul class="nav navbar-nav navbar-right" id="menuItems">
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="#">ABOUT ME</a></li>
+                        <li><a href="#"><i class="fa fa-meetup" aria-hidden="true"></i> PORTFOLIO</a></li>
+                        <li><a href="#">BOOK ONLINE</a></li>
+                        <li><a href="#">BLOG</a></li>
+                        <li>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal">
+                              <i class="fa fa-sign-in">&nbsp;</i>SIGN IN/SIGN UP
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Sign in to your account</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                        
+                                            <div class="input-group">
+                                                <p>Email:</p>
+                                                <input type="text" class="form-control" placeholder="someone@example.com">
+                                            </div><!-- /input-group -->
+                                            <br><br>
+                                            <div class="input-group">
+                                                <p>Password:</p>
+                                                <input type="password" class="form-control" placeholder="***********">
+                                            </div><!-- /input-group -->
+                                            <br><br>
+                                            <p>Don't have an account?<br> Sign up free<a data-dismiss="modal" class="btn btn-link" data-toggle="modal" data-target="#signUpModal">HERE!</a></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </li>
+                    </ul>
+                   
+                  </div>
+                </nav><!--end of nav bar-->
+       </div><!-- end of menu container -->
+       <div class="container" id="footerTermsContainer">
+            <h1>Terms and conditions</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, tempore animi eaque ipsum corporis quia sit et exercitationem quibusdam dicta nisi consequuntur quo quisquam ullam velit pariatur, optio fuga aspernatur?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate perspiciatis optio quod eaque illum eos deserunt nobis doloribus tenetur, itaque delectus iusto veniam quidem, magnam soluta labore maxime possimus eligendi.</p>
+       </div><!-- end of container -->
+       <div class="row footerTerms" id="footer">
+           <p>All rights reserved © Designed by <span class="name">Milos Bajic</span></p>
+       </div>
+ </div><!-- end of main container -->
+ 
+ 
+ <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Sign up for free account</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                        
+                                            <div class="input-group">
+                                                <p>First Name:</p>
+                                                <input type="text" class="form-control">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            <div class="input-group">
+                                                <p>Last Name:</p>
+                                                <input type="text" class="form-control">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            <div class="input-group">
+                                                <p>Email:</p>
+                                                <input type="text" class="form-control" placeholder="someone@example.com">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                             <div class="input-group">
+                                                <p>Password:</p>
+                                                <input type="password" class="form-control" placeholder="**********">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            <div class="input-group">
+                                                <p>Confirm Password:</p>
+                                                <input type="password" class="form-control" placeholder="**********">
+                                            </div><!-- /input-group -->
+                                            <br>
+                                            
+                                            <br>
+                                            <div class="g-recaptcha" data-sitekey="6LcsQRQUAAAAADehRLQVy6tcHlLLf1KlGoZ0QJ6x"></div>
+                                            <br><br>
+                                           <div class="input-group">
+                                              <span class="input-group-addon">
+                                                <input type="checkbox" aria-label="...">
+                                              </span>
+                                              <p>agree with <a href="terms.html">terms and conditions</a></p>
+                                            </div><!-- /input-group -->
+                                            
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+  
+  
+
+   
+    <!-- Online version of jQuery-->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<!--Bootstrap js-->
+	<script src="includes/js/bootstrap.min.js"></script>
+	<!--custom js-->
+    <script src="includes/customJS.js"></script>
+</body>
+</html>
